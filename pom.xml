@@ -1,0 +1,87 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.softlab.efr.common</groupId>
+        <artifactId>efr-parent-pom</artifactId>
+        <version>2.2</version>
+    </parent>
+
+    <artifactId>smedservice-common-dict</artifactId>
+    <version>1.0.5-SNAPSHOT</version>
+    <packaging>pom</packaging>
+    <name>common-dict</name>
+
+    <modules>
+        <module>common-dict-app</module>
+        <module>common-dict-model</module>
+        <module>common-dict-client</module>
+    </modules>
+
+    <scm>
+        <url>http://git.dos.softlab.ru/SMEDSERVICE/common-dict</url>
+        <developerConnection>scm:git:git@git.dos.softlab.ru:SMEDSERVICE/common-dict.git</developerConnection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>coral</id>
+            <name>coral</name>
+            <url>http://coral:18088/repository/efr-insurance</url>
+        </repository>
+    </distributionManagement>
+
+    <properties>
+        <h2.version>1.4.193</h2.version>
+        <services-transport.version>4.1.0</services-transport.version>
+        <efr-common.utilities.version>3.3.0</efr-common.utilities.version>
+        <insurance-service.version>0.0.1</insurance-service.version>
+        <auth-service-support.version>1.0.5</auth-service-support.version>
+        <efr.logging.version>3.2.0</efr.logging.version>
+        <swagger-backend-generator.version>1.0.1</swagger-backend-generator.version>
+        <efr.settings.version>9.1.0</efr.settings.version>
+        <sonar.exclusions>**/ru/softlab/efr/common/dict/exchange/model/**, **/ru/softlab/efr/common/dict/controllers/*Api.java</sonar.exclusions>
+        <sonar.jacoco.reportPaths>${project.basedir}/../target/jacoco.exec</sonar.jacoco.reportPaths>
+    </properties>
+
+    <repositories>
+        <repository>
+            <id>coral</id>
+            <name>coral</name>
+            <url>http://coral:18088/repository/efr</url>
+        </repository>
+        <repository>
+            <id>coral-efr-insurance</id>
+            <name>coral-efr-insurance</name>
+            <url>http://coral:18088/repository/efr-insurance</url>
+        </repository>
+    </repositories>
+
+    <pluginRepositories>
+        <pluginRepository>
+            <id>my-plugin-repo</id>
+            <url>http://coral:18088/repository/efr-common</url>
+        </pluginRepository>
+    </pluginRepositories>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>jacoco-init</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <append>true</append>
+                            <destFile>${sonar.jacoco.reportPaths}</destFile>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+</project>

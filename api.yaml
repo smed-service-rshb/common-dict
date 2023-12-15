@@ -1,0 +1,2429 @@
+swagger: '2.0'
+info:
+  title: API микросервиса общих справочников
+  version: 1.0.0
+paths:
+  #***banks***
+  /dictionaries/banks:
+    get:
+      tags:
+        - Banks
+      description: Список банков
+      operationId: listBanks
+      x-spring-pageable: true
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: bic
+          type: string
+          description: БИК банка
+          required: false
+        - in: query
+          name: name
+          type: string
+          description: Наименование банка
+          required: false
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/bank'
+            description: Постраничный вывод результатов поиска
+        403:
+          description: Forbidden
+    post:
+      tags:
+        - Banks
+      description: Создание банка
+      operationId: createBank
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: bank
+          description: Данные о банке
+          required: true
+          schema:
+            $ref: '#/definitions/bank'
+      responses:
+        201:
+          description: CREATED
+          schema:
+            description: Созданный банк
+            $ref: '#/definitions/bank'
+        403:
+          description: Forbidden
+        409:
+          description: Если указан id и банк с таким id уже существует
+
+  /dictionaries/banks/{id}:
+    get:
+      tags:
+        - Banks
+      description: Возвращает информацию о банке
+      operationId: getBank
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор банка
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о банке
+            $ref: '#/definitions/bank'
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+    put:
+      tags:
+        - Banks
+      description: Редактирование банка
+      operationId: editBank
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор банка
+        - in: body
+          name: bank
+          description: Данные о банке
+          required: true
+          schema:
+            $ref: '#/definitions/bank'
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Сохраненный банк
+            $ref: '#/definitions/bank'
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+    delete:
+      tags:
+        - Banks
+      description: Удаление банка
+      operationId: deleteBank
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор банка
+      responses:
+        204:
+          description: No Content
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  /dictionaries/banks/replication:
+    post:
+      tags:
+        - Banks
+      description: Репликация банков
+      operationId: replicationBanks
+      responses:
+        204:
+          description: No Content
+        403:
+          description: Forbidden
+        500:
+          description: Internal server error
+
+
+  #***branches***
+  /dictionaries/branches:
+    get:
+      tags:
+        - Branches
+      description: Список филиалов
+      operationId: listBranches
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/branch'
+            description: Постраничный вывод результатов поиска
+
+  /dictionaries/branches#byCode:
+    get:
+      tags:
+        - Branches
+      description: Поиск филиала по коду
+      operationId: getBranchByCode
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: code
+          type: string
+          description: Код филиала
+          required: false
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/branch'
+            description: Филиал с заданным кодом
+        404:
+          description: Not Found
+
+  /dictionaries/branches/{id}:
+    get:
+      tags:
+        - Branches
+      description: Возвращает информацию о филиале
+      operationId: getBranch
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор филиала
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о филиале
+            $ref: '#/definitions/branch'
+        404:
+          description: Not Found
+
+
+  #***channels***
+  /dictionaries/channels:
+    get:
+      tags:
+        - Channels
+      description: Список каналов
+      operationId: listChannels
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/channel'
+            description: Постраничный вывод результатов поиска
+
+  /dictionaries/channels/{id}:
+    get:
+      tags:
+        - Channels
+      description: Возвращает информацию о канале
+      operationId: getChannel
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор канала
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о канале
+            $ref: '#/definitions/channel'
+        404:
+          description: Not Found
+
+  #***DivisionCodes***
+  /dictionaries/division-codes:
+    get:
+      tags:
+        - DivisionCodes
+      description: Список кодов подразделений
+      operationId: listDivisionCodes
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/divisionCode'
+            description: Постраничный вывод результатов поиска
+    post:
+      tags:
+        - DivisionCodes
+      description: Создание кода подразделения
+      operationId: createDivisionCode
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: divisionCode
+          description: Данные коде подразделения
+          required: true
+          schema:
+            $ref: '#/definitions/divisionCode'
+      responses:
+        201:
+          description: CREATED
+          schema:
+            description: Созданный код подразделения
+            $ref: '#/definitions/divisionCode'
+        409:
+          description: Если указан id и кода подразделения с таким id уже существует
+
+  /dictionaries/division-codes/{id}:
+    get:
+      tags:
+        - DivisionCodes
+      description: Возвращает информацию о коде подразделения
+      operationId: getDivisionCode
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор кода подразделения
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о коде подразделения
+            $ref: '#/definitions/divisionCode'
+        404:
+          description: Not Found
+
+  /dictionaries/division-codes#byCode:
+    get:
+      tags:
+        - DivisionCodes
+      description: Возвращает информацию о коде подразделения по коду
+      operationId: getDivisionCodeByCode
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: code
+          type: string
+          required: true
+          description: Код подразделения
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/divisionCode'
+            description: Информация о коде подразделения
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  #***currencies***
+  /dictionaries/currencies:
+    get:
+      tags:
+        - Currencies
+      description: Список валют
+      operationId: listCurrencies
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/currency'
+            description: Постраничный вывод результатов поиска
+    post:
+      tags:
+        - Currencies
+      description: Создание валюты
+      operationId: createCurrency
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: currency
+          description: Данные о валюте
+          required: true
+          schema:
+            $ref: '#/definitions/currency'
+      responses:
+        201:
+          description: CREATED
+          schema:
+            description: Созданная валюта
+            $ref: '#/definitions/currency'
+        409:
+          description: Если указан id и валюта с таким id уже существует
+
+  /dictionaries/currencies/{id}:
+    get:
+      tags:
+        - Currencies
+      description: Возвращает информацию о валюте
+      operationId: getCurrency
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор валюты
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о валюте
+            $ref: '#/definitions/currency'
+        404:
+          description: Not Found
+    put:
+      tags:
+        - Currencies
+      description: Редактирование валюты
+      operationId: editCurrency
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор валюты
+        - in: body
+          name: currency
+          description: Данные о валюте
+          required: true
+          schema:
+            $ref: '#/definitions/currency'
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Сохраненная валюта
+            $ref: '#/definitions/currency'
+        404:
+          description: Not Found
+    delete:
+      tags:
+        - Currencies
+      description: Удаление валюты
+      operationId: deleteCurrency
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор валюты
+      responses:
+        204:
+          description: No Content
+        404:
+          description: Not Found
+
+  #***currency-rate***
+  /dictionaries/rates/setting:
+    get:
+      tags:
+      - CurrencyRate
+      description: Получить насройки способа расчета курса валют
+      operationId: getCurrencyRateSetting
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            description: Ответ на запрос получения настроек способа расчета курса валют
+            $ref: '#/definitions/currencyRateSettings'
+        403:
+          description: Forbiden
+        500:
+          description: Internal Server Error
+    post:
+      tags:
+        - CurrencyRate
+      description: Обновить настройки способа расчета курса валют
+      operationId: updateCurrencyRateSetting
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: updateCurrencyRateSetting
+          description: Данные с настройками способа расчета курса
+          required: true
+          schema:
+            $ref: '#/definitions/currencyRateSettings'
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbiden
+        500:
+          description: Internal Server Error
+  /dictionaries/rates:
+    get:
+      tags:
+        - CurrencyRate
+      description: Получить постраничный список курсов валют для отображения в списке
+      operationId: getCurrencyRateList
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: OK
+          schema:
+            description: Постраничный вывод курсов валют
+            $ref: '#/definitions/currencyRateDataForList'
+        403:
+          description: Forbidden
+        500:
+          description: Internal server error
+    post:
+      tags:
+        - CurrencyRate
+      description: Создать запись в справочнике курсов валют
+      operationId: createCurrencyRate
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: createRateRequest
+          description: Запрос создания записи справочника
+          required: true
+          schema:
+            $ref: '#/definitions/currencyRateData'
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbiden
+        500:
+          description: Internal Server Error
+
+  /dictionaries/rate/{id}:
+    get:
+      tags:
+        - CurrencyRate
+      description: Получить данные курса по идентификатору записи в справочнике
+      operationId: getCurrencyById
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          description: Идентификатор записи справочника
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/currencyRateData'
+            description: Данные курса
+        403:
+            description: Forbidden
+        404:
+          description: Not Found
+        500:
+          description: Internal server error
+    put:
+      tags:
+        - CurrencyRate
+      operationId: updateCurrencyRate
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          description: Идентификатор записи справочника
+          required: true
+        - in: body
+          name: updateRateRequest
+          description: Запрос обновления записи справочника
+          required: true
+          schema:
+            $ref: '#/definitions/currencyRateData'
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/currencyRateData'
+            description: Данные курса
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+        500:
+          description: Internal server error
+
+  /dictionaries/currency/rate/cb/:
+    get:
+      tags:
+        - CurrencyRate
+      description: Получить список курсов валют по ЦБ РФ
+      operationId: getCbCurrencyRateList
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: literalIso
+          type: string
+          description: ISO-код валюты
+          required: true
+        - in: query
+          name: startDate
+          description: Дата, с которой необходимо получить курсы. Формат ДД.ММ.ГГГГ
+          required: true
+          type: string
+        - in: query
+          name: endDate
+          description: Дата, по которую необходимо получить курсы. Формат ДД.ММ.ГГГГ
+          required: true
+          type: string
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/currencyCbRateRs'
+            description: Курс валюты
+        404:
+          description: Not Found
+
+  /dictionaries/currency/rate/active:
+    get:
+      tags:
+        - CurrencyRate
+      description: Получить активный курс валюты по идентификатору валюты
+      operationId: getActiveCurrencyRate
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: currencyId
+          type: integer
+          format: int64
+          description: Идентификатор валюты
+          required: true
+      responses:
+        200:
+          description: OK
+          schema:
+            $ref: '#/definitions/shortCurrencyRateData'
+            description: Курс валюты
+        404:
+          description: Not Found
+  #***external-systems***
+  /dictionaries/external-systems:
+    get:
+      tags:
+        - ExternalSystems
+      description: Список внешних систем
+      operationId: listExternalSystems
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/externalSystem'
+            description: Постраничный вывод результатов поиска
+    post:
+      tags:
+        - ExternalSystems
+      description: Создание внешней системы
+      operationId: createExternalSystem
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: externalSystem
+          description: Данные о внешней системе
+          required: true
+          schema:
+            $ref: '#/definitions/externalSystem'
+      responses:
+        201:
+          description: CREATED
+          schema:
+            description: Созданная внешняя система
+            $ref: '#/definitions/externalSystem'
+        409:
+          description: Если указан id и внешняя система с таким id уже существует
+
+  /dictionaries/external-systems#bySystemId:
+    get:
+      tags:
+        - ExternalSystems
+      description: Поиск внешней системы по идентификатору
+      operationId: getExternalSystemBySystemId
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: systemId
+          type: string
+          description: Идентификатор системы (например "BISQUIT:6300")
+          required: false
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/externalSystem'
+            description: Внешняя система с заданным кодом
+        404:
+          description: Not Found
+
+  /dictionaries/external-systems/{id}:
+    get:
+      tags:
+        - ExternalSystems
+      description: Возвращает информацию о внешней системе
+      operationId: getExternalSystem
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор внешней системы
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о внешней системе
+            $ref: '#/definitions/externalSystem'
+        404:
+          description: Not Found
+    put:
+      tags:
+        - ExternalSystems
+      description: Редактирование внешней системы
+      operationId: editExternalSystem
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор внешней системы
+        - in: body
+          name: externalSystem
+          description: Данные о внешней системе
+          required: true
+          schema:
+            $ref: '#/definitions/externalSystem'
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Сохраненная внешняя система
+            $ref: '#/definitions/externalSystem'
+        404:
+          description: Not Found
+    delete:
+      tags:
+        - ExternalSystems
+      description: Удаление внешней системы
+      operationId: deleteExternalSystem
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор внешней системы
+      responses:
+        204:
+          description: No Content
+        404:
+          description: Not Found
+
+
+  #***external-system-errors***
+  /dictionaries/external-system-errors:
+    get:
+      tags:
+        - ExternalSystemsErrors
+      description: Список ошибок внешних систем
+      operationId: listExternalSystemsErrors
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/externalSystemError'
+            description: Постраничный вывод результатов поиска
+    post:
+      tags:
+        - ExternalSystemsErrors
+      description: Создание ошибки внешней системы
+      operationId: createExternalSystemsError
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: externalSystem
+          description: Данные об ошибке внешней системы
+          required: true
+          schema:
+            $ref: '#/definitions/externalSystemError'
+      responses:
+        201:
+          description: CREATED
+          schema:
+            description: Созданная ошибка внешней системы
+            $ref: '#/definitions/externalSystemError'
+        409:
+          description: Если указан id и ошибка внешней системы с таким id уже существует
+
+  /dictionaries/external-system-errors/{id}:
+    get:
+      tags:
+        - ExternalSystemsErrors
+      description: Возвращает информацию об ошибке внешней системе
+      operationId: getExternalSystemsError
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор ошибки внешней системы
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация об ошибке внешней системы
+            $ref: '#/definitions/externalSystemError'
+        404:
+          description: Not Found
+    put:
+      tags:
+        - ExternalSystemsErrors
+      description: Редактирование ошибки внешней системы
+      operationId: editExternalSystemsError
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор ошибки внешней системы
+        - in: body
+          name: externalSystem
+          description: Данные об ошибке внешней системы
+          required: true
+          schema:
+            $ref: '#/definitions/externalSystemError'
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Сохраненная ошибка внешней системы
+            $ref: '#/definitions/externalSystemError'
+        404:
+          description: Not Found
+    delete:
+      tags:
+        - ExternalSystemsErrors
+      description: Удаление ошибки внешней системы
+      operationId: deleteExternalSystemsError
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор ошибки внешней системы
+      responses:
+        204:
+          description: No Content
+        404:
+          description: Not Found
+
+  #***offices***
+  /dictionaries/offices:
+    get:
+      tags:
+        - Offices
+      description: Список офисов
+      operationId: listOffices
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/office'
+            description: Постраничный вывод результатов поиска
+
+  /dictionaries/offices/{id}:
+    get:
+      tags:
+        - Offices
+      description: Возвращает информацию об офисе
+      operationId: getOffice
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор офиса
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о офисе
+            $ref: '#/definitions/office'
+        404:
+          description: Not Found
+
+
+  #***addresses***
+  /dictionaries/addresses:
+    get:
+      tags:
+        - Addresses
+      description: Список адресов
+      operationId: listAddresses
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: words
+          type: string
+          description: Слова поиска
+          required: true
+        - in: query
+          name: parentId
+          type: integer
+          format: int64
+          description: Id родительской записи адреса, относительно которой производится поиск
+          required: false
+      responses:
+        200:
+          description: ОК
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/address'
+            description: Список результатов поиска
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  /dictionaries/addresses/{id}/parents:
+    get:
+      tags:
+        - Addresses
+      description: Возвращает список родительских адресов
+      operationId: getParents
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор адреса
+      responses:
+        200:
+          description: ОК
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/address'
+            description: Список адресов
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  /dictionaries/addresses/{id}:
+    get:
+      tags:
+        - Addresses
+      description: Возвращает информацию об адресе
+      operationId: getAddress
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор адреса
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/address'
+            description: Информация об адресе
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  /dictionaries/addresses/region/list:
+    get:
+      tags:
+        - Addresses
+      description: Возвращает список адресных объектов уровня 1
+      operationId: getRegionList
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/regionRs'
+            description: Ответ на запрос получения списка регионов
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  /dictionaries/addresses/replication:
+    post:
+      tags:
+        - Addresses
+      description: Репликация адресов и строений
+      operationId: replicationAddresses
+      responses:
+        204:
+          description: No Content
+        403:
+          description: Forbidden
+        409:
+          description: Conflict
+        500:
+          description: Internal server error
+
+  /dictionaries/addresses/update:
+    post:
+      tags:
+        - Addresses
+      description: Обновление адресов и строений
+      operationId: updateAddresses
+      responses:
+        204:
+          description: No Content
+        403:
+          description: Forbidden
+        409:
+          description: Conflict
+        500:
+          description: Internal server error
+
+  /dictionaries/addresses/{id}/houses:
+    get:
+      tags:
+        - Addresses
+      description: Список строений
+      operationId: listHouses
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          description: Id родительской записи адреса, относительно которой производится поиск строений
+          required: true
+        - in: query
+          name: house
+          type: string
+          description: Номер дома
+          required: false
+      responses:
+        200:
+          description: ОК
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/house'
+            description: Список результатов поиска
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  /dictionaries/print-templates:
+    get:
+      tags:
+        - PrintTemplates
+      description: Список печатных форм
+      operationId: list
+      responses:
+        200:
+          description: ОК
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/print-template'
+            description: Список печатных форм
+        403:
+          description: Forbidden
+    post:
+      tags:
+        - PrintTemplates
+      operationId: create
+      parameters:
+        - in: formData
+          name: content
+          type: file
+          description: Шаблон формы
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/print-template'
+            description: Метаданные созданной печатной формы
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+        500:
+          description: Internal server error
+
+  /dictionaries/print-templates/{type}:
+    get:
+      tags:
+        - PrintTemplates
+      description: Получение печатной формы по типу без контента
+      operationId: get
+      parameters:
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: Тип печатной формы
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/print-template'
+            description: Метаданные печатной формы
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+        500:
+          description: Internal server error
+    post:
+      tags:
+        - PrintTemplates
+      description: Редактирование печатной формы
+      operationId: edit
+      parameters:
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: Тип печатной формы
+        - in: query
+          name: copiesNumber
+          type: integer
+          description: Количество экземпляров при печати
+          required: true
+        - in: formData
+          name: content
+          type: file
+          description: Шаблон формы
+      responses:
+        200:
+          description: ОК
+          schema:
+            type: string
+            description: Отредактированная печатная форма
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+        500:
+          description: Internal server error
+
+  /dictionaries/print-templates/{type}/content:
+    get:
+      tags:
+        - PrintTemplates
+      description: Получить шаблон печатной формы по типу
+      operationId: getContent
+      produces:
+        - application/octet-stream
+      parameters:
+        - in: path
+          name: type
+          type: string
+          required: true
+          description: Тип печатной формы
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Шаблон печатной формы
+            type: file
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  #***cash symbols***
+
+  /dictionaries/cash-symbols:
+    get:
+      tags:
+        - CashSymbols
+      description: Список кассовых символов
+      operationId: listCashSymbols
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/cash-symbol'
+            description: Постраничный вывод результатов поиска
+        403:
+          description: Forbidden
+
+  /dictionaries/cash-symbols#byCode:
+    get:
+      tags:
+        - CashSymbols
+      description: Возвращает информацию о кассовом символе по коду
+      operationId: getCashSymbolByCode
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: code
+          type: integer
+          format: int64
+          required: true
+          description: Код кассового символа
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о кассовом символе
+            $ref: '#/definitions/cash-symbol'
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  /dictionaries/cash-symbols/{id}:
+    get:
+      tags:
+        - CashSymbols
+      description: Возвращает информацию о кассовом символе
+      operationId: getCashSymbol
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор кассового символа
+      responses:
+        200:
+          description: ОК
+          schema:
+            description: Информация о кассовом символе
+            $ref: '#/definitions/cash-symbol'
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+  /dictionaries/status:
+    get:
+      tags:
+        - DictStatus
+      description: Получение текущего статуса процесса обновления/проверки справочников
+      operationId: getDictStatus
+      x-spring-pageable: true
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/dictStatus'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+    post:
+      tags:
+        - DictStatus
+      description: Сохранение текущего статуса процесса обновления/проверки справочников
+      operationId: setDictStatus
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: setDictStatusRq
+          description: Тело запроса сохранения текущего статуса процесса обновления/проверки справочников
+          required: true
+          schema:
+            $ref: '#/definitions/dictStatus'
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/dictStatusRs'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/currentDict:
+    get:
+      tags:
+        - DictStatus
+      description: Получение идентификатора файла справочника по типу
+      operationId: getCurrentDictIdByName
+      produces:
+        - application/json
+      parameters:
+        - in: query
+          name: dictName
+          type: string
+          required: true
+          description: Наименование справочника
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/currentDictRs'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/invalididentitydoc/check:
+    post:
+      tags:
+        - InvalidIdentityDocs
+      description: Проверка паспортных данных по справочнику недействительных паспортов
+      operationId: checkInvalidIdentityDoc
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: checkInvalidIdentityDocRq
+          description: Тело запроса проверки паспортных данных по справочнику недействительных паспортов
+          required: true
+          schema:
+            $ref: '#/definitions/checkInvalidIdentityDocRq'
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/checkInvalidIdentityDocRs'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/invalididentitydoc/update:
+    get:
+      tags:
+        - InvalidIdentityDocs
+      description: Запрос обновления списка недействительных паспортов
+      operationId: updateInvalidIdentityDocList
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/updateListStatus'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/invalididentitydoc/status:
+    get:
+      tags:
+        - InvalidIdentityDocs
+      description: Получение текущего статуса процесса обновления справочника недействительных паспортов
+      operationId: getInvalidIdentityDocUpdateStatus
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/updateListStatus'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/terrorist/check:
+    post:
+      tags:
+        - Terrorists
+      description: Проверка паспортных данных по справочнику экстремистов/террористов
+      operationId: checkTerrorist
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: checkTerroristRq
+          description: Тело запроса проверки паспортных данных по справочнику экстремистов/террористов
+          required: true
+          schema:
+            $ref: '#/definitions/checkTerroristRq'
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/checkTerroristRs'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/terrorist/update:
+    get:
+      tags:
+        - Terrorists
+      description: Запрос обновления списка экстремистов/террористов
+      operationId: updateTerroristList
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/updateListStatus'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+    post:
+      tags:
+        - Terrorists
+      operationId: uploadTerrorists
+      parameters:
+        - in: formData
+          name: content
+          type: file
+          description: DBF файл справочник террористов
+      responses:
+        200:
+          description: ОК
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+        500:
+          description: Internal server error
+
+  /dictionaries/terrorist/status:
+    get:
+      tags:
+        - Terrorists
+      description: Получение текущего статуса процесса обновления справочника экстремистов/террористов
+      operationId: getTerroristUpdateStatus
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/updateListStatus'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/blockages/check:
+    post:
+      tags:
+        - Blockages
+      description: Проверка паспортных данных по справочнику блокировок/заморозок
+      operationId: checkBlockages
+      produces:
+        - application/json
+      consumes:
+        - application/json
+      parameters:
+        - in: body
+          name: checkBlockagesRq
+          description: Тело запроса проверки паспортных данных по справочнику блокировок/заморозок
+          required: true
+          schema:
+            $ref: '#/definitions/checkBlockagesRq'
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/checkBlockagesRs'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/blockages/update:
+    get:
+      tags:
+        - Blockages
+      description: Запрос обновления списка блокировок/заморозок
+      operationId: updateBlockageList
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/updateListStatus'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+    post:
+      tags:
+        - Blockages
+      operationId: uploadBlockages
+      parameters:
+        - in: formData
+          name: content
+          type: file
+          description: XML файл-справочник заморозок/блокировок
+      responses:
+        200:
+          description: ОК
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+        500:
+          description: Internal server error
+
+  /dictionaries/blockages/status:
+    get:
+      tags:
+        - Blockages
+      description: Получение текущего статуса процесса обновления справочника блокировок/заморозок
+      operationId: getBlockageUpdateStatus
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/updateListStatus'
+        403:
+          description: Доступ запрещен
+        500:
+          description: Internal server error
+
+  /dictionaries/identitydoctype:
+    get:
+      tags:
+        - IdentityDocTypes
+      description: Список типов документов
+      operationId: listIdentityDocTypes
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/getIdentityDocTypeListRs'
+            description: Список типов документов
+        403:
+          description: Forbidden
+    post:
+      tags:
+        - IdentityDocTypes
+      description: Создание/сохранение типа документа
+      operationId: upsertIdentityDocType
+      consumes:
+        - application/json
+      produces:
+        - application/json
+      parameters:
+        - in: body
+          name: identityDocType
+          description: Данные о типе документа
+          required: true
+          schema:
+            $ref: '#/definitions/identityDocType'
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbidden
+  /dictionaries/identitydoctype/{id}:
+    delete:
+      tags:
+        - IdentityDocTypes
+      description: Удаление типа документа
+      operationId: deleteIdentityDocType
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          required: true
+          description: Идентификатор типа документа
+      responses:
+        200:
+          description: OK
+        403:
+          description: Forbidden
+
+  /dictionaries/publicofficial:
+    get:
+      tags:
+        - PublicOfficials
+      description: Справочник видов публичных должностных лиц
+      operationId: listPublicOfficial
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/getAbstractDictRs'
+            description: Справочник видов публичных должностных лиц
+        403:
+          description: Forbidden
+
+  /dictionaries/foreignpublicofficial:
+    get:
+      tags:
+        - ForeignPublicOfficials
+      description: Справочник видов иностранных публичных должностных лиц
+      operationId: listForeignPublicOfficial
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/getAbstractDictRs'
+            description: Справочник видов иностранных публичных должностных лиц
+        403:
+          description: Forbidden
+
+  /dictionaries/kinshiptype:
+    get:
+      tags:
+        - KinshipTypes
+      description: Справочник видов степеней родства
+      operationId: listKinshipTypes
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/getAbstractDictRs'
+            description: Справочник видов степеней родства
+        403:
+          description: Forbidden
+
+  /dictionaries/russianpublicofficial:
+    get:
+      tags:
+        - RussianPublicOfficials
+      description: Справочник видов российских публичных должностных лиц
+      operationId: listRussianPublicOfficials
+      produces:
+        - application/json
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/getAbstractDictRs'
+            description: Справочник видов российских публичных должностных лиц
+        403:
+          description: Forbidden
+
+  /dictionaries/current-state/{id}/file-date:
+    get:
+      tags:
+        - DictStatus
+      description: Получить дату загрузки справочника по которому проводилась проверка пользователя
+      operationId: getFileDate
+      produces:
+        - application/json
+      parameters:
+        - in: path
+          name: id
+          type: integer
+          format: int64
+          description: update_id проверяемого пользователя
+          required: true
+      responses:
+        200:
+          description: ОК
+          schema:
+            $ref: '#/definitions/fileDateForCurrentState'
+            description: Дата загрузки справочника
+        403:
+          description: Forbidden
+        404:
+          description: Not Found
+
+definitions:
+  currencyCbRateRs:
+    type: object
+    description: Ответ на запрос получения курсов валют ЦБ РФ
+    properties:
+      rates:
+        type: array
+        items:
+          $ref: '#/definitions/currencyCbRateData'
+
+  currencyCbRateData:
+    type: object
+    description: Курс валюты ЦБ РФ
+    required:
+      - currencyIso
+      - date
+      - rate
+    properties:
+      currencyIso:
+        type: string
+        description: ISO-код валюты
+      date:
+        type: string
+        description: Дата действия курса. Формат ДД.ММ.ГГГГ
+      rate:
+        type: number
+        description: Курс ЦБ РФ
+
+  currencyRateSettings:
+    type: object
+    description: Настройки расчета курса валюты
+    properties:
+      calculationType:
+        $ref: '#/definitions/calculationType'
+        description: Способ расчета курса валюты Организации
+      additionalPercent:
+        type: number
+        description: Добавочный процент для расчета курса валюты организации
+  currencyRateDataForList:
+    allOf:
+      - $ref: '#/definitions/currencyRateData'
+      - type: object
+        properties:
+          currencyIso:
+            type: string
+            description: ISO-код валюты
+  currencyRateData:
+    type: object
+    description: Курс валюты
+    required:
+      - currencyId
+      - rate
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Идентификатор записи справочника
+      currencyId:
+        type: integer
+        format: int64
+        description: Идентификатор валюты
+      rate:
+        type: number
+        description: Курс ЦБ РФ
+      innerRate:
+        type: number
+        description: Курс Организации
+      startDate:
+        type: string
+        format: date-time
+        description: Дата начала действия курса
+      endDate:
+        type: string
+        format: date-time
+        description: Дата окончания действия курса
+      active:
+        type: boolean
+        description: Признак действующего курса валюты
+      edited:
+        type: boolean
+        description: Признак ручного редактирования
+
+  shortCurrencyRateData:
+    type: object
+    description: Курс валюты
+    required:
+      - id
+      - currencyId
+      - rate
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Идентификатор записи справочника
+      currencyId:
+        type: integer
+        format: int64
+        description: Идентификатор валюты
+      rate:
+        type: number
+        description: Курс ЦБ РФ
+      innerRate:
+        type: number
+        description: Курс Организации
+
+  dictType:
+    type: string
+    description: Вид справочника
+    enum:
+      - TERRORIST
+      - BLOCKAGE
+      - INVALID_IDENTITY_DOC
+
+  calculationType:
+    type: string
+    description: Способ расчета курса валюты Организации
+    enum:
+      - CB_RF_RATE
+      - SET_BY_ADMINISTRATOR
+      - CB_RF_WITH_PERCENT
+
+  dictOperation:
+    type: string
+    description: Тип операции по справочнику (обновление/проверка)
+    enum:
+      - update
+      - check
+      - finished
+
+  addressLevel:
+    type: string
+    description: Уровень иерархии адреса
+    enum:
+      - region
+      - area
+      - city
+      - locality
+      - street
+      - unknown
+
+  houseType:
+    type: string
+    description: Тип строения
+    enum:
+      - unknown
+      - building
+      - construction
+      - letter
+
+  bank:
+    type: object
+    description: Банк
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      name:
+        type: string
+        description: Наименование
+      shortName:
+        type: string
+        description: Краткое наименование
+      bic:
+        type: string
+        description: БИК
+      swift:
+        type: string
+        description: SWIFT
+      description:
+        type: string
+        description: Описание
+      corrAccount:
+        type: string
+        description: Корр. счет
+      address:
+        type: string
+        description: Адрес
+      changedByHand:
+        type: boolean
+        description: Признак изменение данных вручную
+      resident:
+        type: boolean
+        description: Признак резидент РФ
+      deleted:
+        type: boolean
+        description: Признак удален
+
+  branch:
+    type: object
+    description: Филиал
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      code:
+        type: string
+        description: Код филиала
+      simpleName:
+        type: string
+        description: Краткое наименование
+      officialName:
+        type: string
+        description: Официальное наименование
+
+  channel:
+    type: object
+    description: Канал
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      shortName:
+        type: string
+        description: Краткое наименование
+      fullName:
+        type: string
+        description: Полное наименование
+
+  currency:
+    type: object
+    description: Валюта
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      literalISO:
+        type: string
+        description: ISO код
+      digitalISO:
+        type: integer
+        format: int64
+        description: Цифровой код
+      currencyName:
+        type: string
+        description: Наименование
+      fullCurrencyName:
+        type: string
+        description: Полное наименование
+      countryHolder:
+        type: string
+        description: Страна-эмиссионер
+
+  divisionCode:
+    type: object
+    description: Коды подразделений
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      code:
+        type: string
+        description: код
+      description:
+        type: string
+        description: описание
+
+  externalSystem:
+    type: object
+    description: Внешняя система
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      name:
+        type: string
+        description: Название
+      systemType:
+        type: string
+        description: Тип системы
+      systemId:
+        type: string
+        description: Идентификатор системы вида BISQUIT:6300
+      connectTimeout:
+        type: integer
+        format: int64
+        description: Таймаут соединения
+      failurePeriod:
+        type: integer
+        format: int64
+        description: Период отказа
+      failurePeriodCount:
+        type: integer
+        format: int64
+        description: Количество периодов отказа
+
+  externalSystemError:
+    type: object
+    description: Ошибка внешней системы
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      serviceName:
+        type: string
+        description: Название внешней системы
+      errorCode:
+        type: string
+        description: Код ошибки
+      message:
+        type: string
+        description: Сообщение об ошибке
+
+  office:
+    type: object
+    description: Офис
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      rfId:
+        type: integer
+        format: int64
+        description: Id региона
+      simpleName:
+        type: string
+        description: Сокращенное наименование
+      officialName:
+        type: string
+        description: Официальное наименование
+      postAddress:
+        type: string
+        description: Почтовый адрес
+      phone:
+        type: string
+        description: Телефон
+      startTime:
+        type: string
+        description: Время начала работы
+      endTime:
+        type: string
+        description: Время окончания работы
+
+  address:
+    type: object
+    description: Адрес
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      offname:
+        type: string
+        description: Официальное название
+      shortname:
+        type: string
+        description: Сокращенное наименование
+      level:
+        $ref: '#/definitions/addressLevel'
+        description: Уровень адресной иерархии
+      fulladdress:
+        type: string
+        description: Полный адрес
+      postalcode:
+        type: string
+        description: Почтовый адрес
+
+  regionRs:
+    type: object
+    properties:
+      regions:
+        type: array
+        items:
+          $ref: '#/definitions/region'
+
+  region:
+    type: object
+    description: Информация о регионе
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      name:
+        type: string
+        description: Наименование
+      okato:
+        type: string
+        description: Код по классификатору ОКАТО
+
+  house:
+    type: object
+    description: Строение
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      housenum:
+        type: string
+        description: Номер дома
+      buildnum:
+        type: string
+        description: Номер корпуса
+      strucnum:
+        type: string
+        description: Номер строения
+      postalcode:
+        type: string
+        description: Почтовый индекс
+      houseType:
+        $ref: '#/definitions/houseType'
+        description: Тип строения
+
+  print-template:
+    type: object
+    description: Шаблон печатной формы
+    properties:
+      type:
+        type: string
+        description: Тип печатной формы
+      copiesNumber:
+        type: integer
+        description: Количество экземпляров при печати
+      fileName:
+        type: string
+        description: Имя файла
+
+  operationType:
+    type: string
+    description: Тип операции
+    enum:
+      - income
+      - expenditure
+
+  cash-symbol:
+    description: Кассовый символ
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Id записи
+      code:
+        type: integer
+        format: int64
+        description: Код
+      name:
+        type: string
+        description: Наименование
+      operationType:
+        $ref: '#/definitions/operationType'
+        description: Применение
+      purposeOfPayment:
+        type: string
+        description: Назначение платежа
+
+  updateListStatus:
+    type: object
+    properties:
+      status:
+        type: string
+
+  fileDateForCurrentState:
+    type: object
+    properties:
+      fileDate:
+        type: string
+
+  dictStatusRs:
+    type: object
+    properties:
+      statusList:
+        type: array
+        items:
+          $ref: '#/definitions/dictStatus'
+
+  dictStatus:
+    type: object
+    properties:
+      date:
+        type: string
+        format: date-time
+        description: Дата обновления справочника
+      dictName:
+        $ref: '#/definitions/dictType'
+        description: Наименование справочника
+      dictOperation:
+        $ref: '#/definitions/dictOperation'
+        description: Тип события - обновление или проверка
+      fileName:
+        type: string
+        description: Наименование файла-источника
+      size:
+        type: integer
+        format: int64
+        description: Размер справочника в байтах
+
+  identityDocRq:
+    type: object
+    required:
+      - id
+    properties:
+      id:
+        type: string
+        description: Уникальный идентификатор (в рамках запроса) для обратной связи
+      passportSeries:
+        type: integer
+        description: Серия паспорта
+      passportNumber:
+        type: integer
+        description: Номер паспорта
+
+  checkInvalidIdentityDocRq:
+    type: object
+    properties:
+      identityDocs:
+        type: array
+        items:
+          $ref: '#/definitions/identityDocRq'
+
+  identityDocCheckResult:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Идентификатор записи
+      isInvalidIdentityDoc:
+        type: boolean
+        description: Результат проверки
+
+  checkInvalidIdentityDocRs:
+    type: object
+    properties:
+      updateId:
+        type: string
+        description: Идентификатор записи содержащей информацию о файле-справочнике
+      resultList:
+        type: array
+        items:
+          $ref: '#/definitions/identityDocCheckResult'
+
+  personnelData:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Уникальный (в рамках запроса) идентификатор для обратной взаимосвязи
+      lastName:
+        type: string
+        description: Фамилия
+      firstName:
+        type: string
+        description: Имя
+      middleName:
+        type: string
+        description: Отчество
+      birthDate:
+        type: string
+        format: date
+        description: Дата рождения
+      passportSeries:
+        type: string
+        description: Серия паспорта
+      passportNumber:
+        type: string
+        description: Номер паспорта
+
+  checkTerroristRq:
+    type: object
+    properties:
+      citizens:
+        type: array
+        items:
+          $ref: '#/definitions/personnelData'
+
+  checkBlockagesRq:
+    type: object
+    properties:
+      citizens:
+        type: array
+        items:
+          $ref: '#/definitions/personnelData'
+
+  checkTerroristResult:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Идентификатор записи
+      isTerrorist:
+        type: boolean
+        description: Результат проверки
+      additionalInf:
+        type: string
+        description: Подробности
+
+  checkBlockagesResult:
+    type: object
+    properties:
+      id:
+        type: string
+        description: Идентификатор записи
+      isBlock:
+        type: boolean
+        description: Результат проверки
+      additionalInf:
+        type: string
+        description: Подробности
+
+  checkTerroristRs:
+    type: object
+    properties:
+      updateId:
+        type: string
+        description: Идентификатор записи содержащей информацию о файле-справочнике
+      citizens:
+        type: array
+        items:
+          $ref: '#/definitions/checkTerroristResult'
+
+  checkBlockagesRs:
+    type: object
+    properties:
+      updateId:
+        type: string
+        description: Идентификатор записи содержащей информацию о файле-справочнике
+      citizens:
+        type: array
+        items:
+          $ref: '#/definitions/checkBlockagesResult'
+
+  getIdentityDocTypeListRs:
+    type: object
+    properties:
+      identityDocTypes:
+        type: array
+        items:
+          $ref: '#/definitions/identityDocType'
+
+  identityDocType:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Идентификатор записи
+      name:
+        type: string
+        description: Наименование типа документа
+      schema:
+        type: string
+        description: Схема полей
+
+  getAbstractDictRs:
+    type: object
+    properties:
+      dictItems:
+        type: array
+        items:
+          $ref: '#/definitions/abstractDictItem'
+
+  abstractDictItem:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Идентификатор записи
+      name:
+        type: string
+        description: Наименование элемента справочника
+
+  currentDictRs:
+    type: object
+    properties:
+      id:
+        type: integer
+        format: int64
+        description: Идентификатор записи

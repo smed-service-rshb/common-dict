@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>ru.softlab.efr.common</groupId>
+        <artifactId>smedservice-common-dict</artifactId>
+        <version>1.0.5-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>smedservice-common-dict-client</artifactId>
+
+    <properties>
+        <sonar.exclusions>**/ru/softlab/efr/common/client/**</sonar.exclusions>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>ru.softlab.efr.common</groupId>
+            <artifactId>smedservice-common-dict-model</artifactId>
+            <version>1.0.5-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>ru.softlab.efr.common</groupId>
+            <artifactId>utilities</artifactId>
+            <version>${efr-common.utilities.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>ru.softlab.efr.infrastructure</groupId>
+                    <artifactId>transport-support</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>ru.softlab.efr.infrastructure</groupId>
+            <artifactId>transport-support</artifactId>
+            <version>${services-transport.version}</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>io.swagger</groupId>
+                <artifactId>swagger-codegen-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>compile</id>
+                        <goals>
+                            <goal>generate</goal>
+                        </goals>
+                        <configuration>
+                            <inputSpec>${project.basedir}/../api.yaml</inputSpec>
+                            <language>ru.softlab.efr.common.swagger.generator.backend.ClientCodegen</language>
+                            <modelPackage>ru.softlab.efr.common.dict.exchange.model</modelPackage>
+                            <apiPackage>ru.softlab.efr.common.client</apiPackage>
+                            <output>${project.basedir}</output>
+                            <generateSupportingFiles>false</generateSupportingFiles>
+                            <configOptions>
+                                <additional-properties>applicationName=common-dict-app</additional-properties>
+                            </configOptions>
+                        </configuration>
+                    </execution>
+                </executions>
+                <dependencies>
+                    <dependency>
+                        <groupId>ru.softlab.efr</groupId>
+                        <artifactId>swagger-backend-generator</artifactId>
+                        <version>${swagger-backend-generator.version}</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
+        </plugins>
+    </build>
+</project>

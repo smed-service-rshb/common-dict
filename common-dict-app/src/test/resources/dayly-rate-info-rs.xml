@@ -1,0 +1,275 @@
+<?xml version="1.0" encoding="utf-8"?>
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+    <soap:Body>
+        <GetCursOnDateResponse xmlns="http://web.cbr.ru/">
+            <GetCursOnDateResult>
+                <xs:schema id="ValuteData" xmlns="" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+                           xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+                           xmlns:msprop="urn:schemas-microsoft-com:xml-msprop">
+                    <xs:element name="ValuteData" msdata:IsDataSet="true" msdata:UseCurrentLocale="true"
+                                msprop:OnDate="20181212">
+                        <xs:complexType>
+                            <xs:choice minOccurs="0" maxOccurs="unbounded">
+                                <xs:element name="ValuteCursOnDate">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="Vname" type="xs:string" minOccurs="0"/>
+                                            <xs:element name="Vnom" type="xs:decimal" minOccurs="0"/>
+                                            <xs:element name="Vcurs" type="xs:decimal" minOccurs="0"/>
+                                            <xs:element name="Vcode" type="xs:int" minOccurs="0"/>
+                                            <xs:element name="VchCode" type="xs:string" minOccurs="0"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                            </xs:choice>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:schema>
+                <diffgr:diffgram xmlns:msdata="urn:schemas-microsoft-com:xml-msdata"
+                                 xmlns:diffgr="urn:schemas-microsoft-com:xml-diffgram-v1">
+                    <ValuteData xmlns="">
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate1" msdata:rowOrder="0">
+                            <Vname>Австралийский доллар</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>47.8816</Vcurs>
+                            <Vcode>36</Vcode>
+                            <VchCode>AUD</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate2" msdata:rowOrder="1">
+                            <Vname>Азербайджанский манат</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>39.1996</Vcurs>
+                            <Vcode>944</Vcode>
+                            <VchCode>AZN</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate3" msdata:rowOrder="2">
+                            <Vname>Фунт стерлингов Соединенного королевства</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>83.8194</Vcurs>
+                            <Vcode>826</Vcode>
+                            <VchCode>GBP</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate4" msdata:rowOrder="3">
+                            <Vname>Армянский драм</Vname>
+                            <Vnom>100</Vnom>
+                            <Vcurs>13.6920</Vcurs>
+                            <Vcode>51</Vcode>
+                            <VchCode>AMD</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate5" msdata:rowOrder="4">
+                            <Vname>Белорусский рубль</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>31.3128</Vcurs>
+                            <Vcode>933</Vcode>
+                            <VchCode>BYN</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate6" msdata:rowOrder="5">
+                            <Vname>Болгарский лев</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>38.7001</Vcurs>
+                            <Vcode>975</Vcode>
+                            <VchCode>BGN</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate7" msdata:rowOrder="6">
+                            <Vname>Бразильский реал</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>16.9731</Vcurs>
+                            <Vcode>986</Vcode>
+                            <VchCode>BRL</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate8" msdata:rowOrder="7">
+                            <Vname>Венгерский форинт</Vname>
+                            <Vnom>100</Vnom>
+                            <Vcurs>23.3998</Vcurs>
+                            <Vcode>348</Vcode>
+                            <VchCode>HUF</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate9" msdata:rowOrder="8">
+                            <Vname>Гонконгский доллар</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>85.1010</Vcurs>
+                            <Vcode>344</Vcode>
+                            <VchCode>HKD</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate10" msdata:rowOrder="9">
+                            <Vname>Датская крона</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>10.1408</Vcurs>
+                            <Vcode>208</Vcode>
+                            <VchCode>DKK</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate11" msdata:rowOrder="10">
+                            <Vname>Доллар США</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>35.99</Vcurs>
+                            <Vcode>840</Vcode>
+                            <VchCode>USD</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate12" msdata:rowOrder="11">
+                            <Vname>Евро</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>75.6197</Vcurs>
+                            <Vcode>978</Vcode>
+                            <VchCode>EUR</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate13" msdata:rowOrder="12">
+                            <Vname>Индийская рупия</Vname>
+                            <Vnom>100</Vnom>
+                            <Vcurs>92.5699</Vcurs>
+                            <Vcode>356</Vcode>
+                            <VchCode>INR</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate14" msdata:rowOrder="13">
+                            <Vname>Казахстанский тенге</Vname>
+                            <Vnom>100</Vnom>
+                            <Vcurs>17.9358</Vcurs>
+                            <Vcode>398</Vcode>
+                            <VchCode>KZT</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate15" msdata:rowOrder="14">
+                            <Vname>Канадский доллар</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>49.5878</Vcurs>
+                            <Vcode>124</Vcode>
+                            <VchCode>CAD</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate16" msdata:rowOrder="15">
+                            <Vname>Киргизский сом</Vname>
+                            <Vnom>100</Vnom>
+                            <Vcurs>95.2754</Vcurs>
+                            <Vcode>417</Vcode>
+                            <VchCode>KGS</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate17" msdata:rowOrder="16">
+                            <Vname>Китайский юань</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>96.3940</Vcurs>
+                            <Vcode>156</Vcode>
+                            <VchCode>CNY</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate18" msdata:rowOrder="17">
+                            <Vname>Молдавский лей</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>38.5744</Vcurs>
+                            <Vcode>498</Vcode>
+                            <VchCode>MDL</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate19" msdata:rowOrder="18">
+                            <Vname>Норвежская крона</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>78.0158</Vcurs>
+                            <Vcode>578</Vcode>
+                            <VchCode>NOK</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate20" msdata:rowOrder="19">
+                            <Vname>Польский злотый</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>17.6118</Vcurs>
+                            <Vcode>985</Vcode>
+                            <VchCode>PLN</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate21" msdata:rowOrder="20">
+                            <Vname>Румынский лей</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>16.2685</Vcurs>
+                            <Vcode>946</Vcode>
+                            <VchCode>RON</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate22" msdata:rowOrder="21">
+                            <Vname>СДР (специальные права заимствования)</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>92.1361</Vcurs>
+                            <Vcode>960</Vcode>
+                            <VchCode>XDR</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate23" msdata:rowOrder="22">
+                            <Vname>Сингапурский доллар</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>48.4357</Vcurs>
+                            <Vcode>702</Vcode>
+                            <VchCode>SGD</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate24" msdata:rowOrder="23">
+                            <Vname>Таджикский сомони</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>70.6343</Vcurs>
+                            <Vcode>972</Vcode>
+                            <VchCode>TJS</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate25" msdata:rowOrder="24">
+                            <Vname>Турецкая лира</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>12.3702</Vcurs>
+                            <Vcode>949</Vcode>
+                            <VchCode>TRY</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate26" msdata:rowOrder="25">
+                            <Vname>Новый туркменский манат</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>19.0278</Vcurs>
+                            <Vcode>934</Vcode>
+                            <VchCode>TMT</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate27" msdata:rowOrder="26">
+                            <Vname>Узбекский сум</Vname>
+                            <Vnom>10000</Vnom>
+                            <Vcurs>80.2070</Vcurs>
+                            <Vcode>860</Vcode>
+                            <VchCode>UZS</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate28" msdata:rowOrder="27">
+                            <Vname>Украинская гривна</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>23.9870</Vcurs>
+                            <Vcode>980</Vcode>
+                            <VchCode>UAH</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate29" msdata:rowOrder="28">
+                            <Vname>Чешская крона</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>29.2594</Vcurs>
+                            <Vcode>203</Vcode>
+                            <VchCode>CZK</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate30" msdata:rowOrder="29">
+                            <Vname>Шведская крона</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>73.3817</Vcurs>
+                            <Vcode>752</Vcode>
+                            <VchCode>SEK</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate31" msdata:rowOrder="30">
+                            <Vname>Швейцарский франк</Vname>
+                            <Vnom>1</Vnom>
+                            <Vcurs>67.3440</Vcurs>
+                            <Vcode>756</Vcode>
+                            <VchCode>CHF</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate32" msdata:rowOrder="31">
+                            <Vname>Южноафриканский рэнд</Vname>
+                            <Vnom>10</Vnom>
+                            <Vcurs>45.9851</Vcurs>
+                            <Vcode>710</Vcode>
+                            <VchCode>ZAR</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate33" msdata:rowOrder="32">
+                            <Vname>Вон Республики Корея</Vname>
+                            <Vnom>1000</Vnom>
+                            <Vcurs>58.7631</Vcurs>
+                            <Vcode>410</Vcode>
+                            <VchCode>KRW</VchCode>
+                        </ValuteCursOnDate>
+                        <ValuteCursOnDate diffgr:id="ValuteCursOnDate34" msdata:rowOrder="33">
+                            <Vname>Японская иена</Vname>
+                            <Vnom>100</Vnom>
+                            <Vcurs>58.8177</Vcurs>
+                            <Vcode>392</Vcode>
+                            <VchCode>JPY</VchCode>
+                        </ValuteCursOnDate>
+                    </ValuteData>
+                </diffgr:diffgram>
+            </GetCursOnDateResult>
+        </GetCursOnDateResponse>
+    </soap:Body>
+</soap:Envelope>

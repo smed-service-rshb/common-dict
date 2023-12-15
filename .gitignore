@@ -1,0 +1,10 @@
+.idea/uiDesigner.xml
+.idea/artifacts
+.idea/libraries
+.idea/dictionaries
+.idea/dataSources
+.idea/deployment.xml
+.idea/checkstyle-idea.xml
+target
+dist
+/.idea/sonarlint/issuestore
