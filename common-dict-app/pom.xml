@@ -2,20 +2,20 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>smedservice-common-dict</artifactId>
-        <groupId>ru.softlab.efr.common</groupId>
-        <version>1.0.5-SNAPSHOT</version>
+        <groupId>ru.softlab.insurance.sms.services</groupId>
+        <artifactId>common-dict</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
 
-    <artifactId>smedservice-common-dict-app</artifactId>
+    <artifactId>common-dict-app</artifactId>
     <packaging>war</packaging>
 
     <dependencies>
         <!--SOFTLAB-->
         <dependency>
-            <groupId>ru.softlab.efr.common</groupId>
-            <artifactId>smedservice-common-dict-model</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
+            <groupId>ru.softlab.insurance.sms.services</groupId>
+            <artifactId>common-dict-model</artifactId>
+            <version>${project.version}</version>
         </dependency>
 
         <dependency>
@@ -35,9 +35,9 @@
         </dependency>
 
         <dependency>
-            <groupId>ru.softlab.efr.authentication</groupId>
-            <artifactId>smedservice-auth-service-support</artifactId>
-            <version>${auth-service-support.version}</version>
+            <groupId>ru.softlab.insurance.sms.services</groupId>
+            <artifactId>auth-service-support</artifactId>
+            <version>${auth.service.version}</version>
 
         </dependency>
         <dependency>
@@ -132,9 +132,9 @@
         </dependency>
         <!--TEST-->
         <dependency>
-            <groupId>ru.softlab.efr.authentication</groupId>
-            <artifactId>smedservice-auth-service-test</artifactId>
-            <version>${auth-service-support.version}</version>
+            <groupId>ru.softlab.insurance.sms.services</groupId>
+            <artifactId>auth-service-test</artifactId>
+            <version>${auth.service.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -156,11 +156,6 @@
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -189,9 +184,9 @@
             <scope>test</scope>
         </dependency>
         <dependency>
-            <groupId>ru.softlab.efr.common</groupId>
-            <artifactId>smedservice-common-dict-client</artifactId>
-            <version>1.0.5-SNAPSHOT</version>
+            <groupId>ru.softlab.insurance.sms.services</groupId>
+            <artifactId>common-dict-client</artifactId>
+            <version>${project.version}</version>
             <scope>test</scope>
         </dependency>
         <dependency>

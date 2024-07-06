@@ -3,11 +3,11 @@
 
     <modelVersion>4.0.0</modelVersion>
     <parent>
-        <artifactId>smedservice-common-dict</artifactId>
-        <groupId>ru.softlab.efr.common</groupId>
-        <version>1.0.5-SNAPSHOT</version>
+        <artifactId>common-dict</artifactId>
+        <groupId>ru.softlab.insurance.sms.services</groupId>
+        <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>smedservice-common-dict-model</artifactId>
+    <artifactId>common-dict-model</artifactId>
     <packaging>jar</packaging>
 
     <properties>
