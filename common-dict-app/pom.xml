@@ -4,7 +4,7 @@
     <parent>
         <groupId>ru.softlab.insurance.sms.services</groupId>
         <artifactId>common-dict</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
+        <version>0.0.1</version>
     </parent>
 
     <artifactId>common-dict-app</artifactId>
